@@ -1,0 +1,257 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #ff6b00 0%, #ff9800 100%);
+  --primary-color: #ff6b00;
+  --primary-hover: #e66000;
+  --bg-gradient: linear-gradient(135deg, #fff8f0 0%, #ffebd9 100%);
+  --card-bg: #ffffff;
+  --text-main: #2d1e18;
+  --text-muted: #8c7365;
+  --border-color: #ffe0cc;
+  --accent-light: #fff3eb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  height: auto;
+  padding: 12px 20px;
+  overflow: visible;
+  min-height: 80px;
+}
+
+h1 {
+  line-height: 1.3;
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* --- Main Card --- */
+.card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(255, 107, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- Amount Input Box --- */
+.amount-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: var(--accent-light);
+  transition: all 0.25s ease;
+}
+
+.amount-box:focus-within {
+  border-color: var(--primary-color);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.15);
+}
+
+.amount-box span {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.amount-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  font-weight: 700;
+  margin-left: 10px;
+  background: transparent;
+  color: var(--text-main);
+}
+
+/* --- QR Code Display --- */
+.qr-section {
+  text-align: center;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-wrapper {
+  padding: 14px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.08);
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.qr-wrapper:hover {
+  transform: scale(1.03);
+}
+
+.qr-section img,
+.qr-section svg {
+  display: block;
+  border-radius: 8px;
+}
+
+.qr-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-top: 12px;
+}
+
+/* --- Pay Directly Button --- */
+.pay-app-btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 24px;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(255, 107, 0, 0.35);
+  transition: all 0.2s ease;
+}
+
+.pay-app-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.45);
+}
+
+/* --- Fixed UPI Card & Copy Button Alignment --- */
+.upi-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--accent-light);
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upi-card:hover {
+  background: #ffe3d1;
+  border-color: var(--primary-color);
+}
+
+.upi-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevents text from overflowing flex container */
+  flex: 1;
+}
+
+.upi-info small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upi-info strong {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncates long UPI IDs gracefully with ... */
+}
+
+.copy-btn {
+  border: none;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0; /* Ensures button never shrinks or gets pushed out */
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  transform: scale(1.05);
+}
+
+.note {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-top: 18px;
+  line-height: 1.4;
+}
