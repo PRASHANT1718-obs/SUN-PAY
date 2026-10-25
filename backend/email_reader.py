@@ -200,12 +200,7 @@ def extract_time(text):
 
 
 def parse_hdfc_email(body):
-    """
-    Parse a positive HDFC UPI credit notification.
-
-    Debit notifications, missing amounts and missing UPI
-    references are rejected.
-    """
+   
 
     text = clean_email_text(body)
 
@@ -297,9 +292,7 @@ def parse_hdfc_email(body):
     if not transaction_ref:
         print("Could not find UPI transaction reference.")
         return None
-
-      payer_name = None
-
+    payer_name = None
     sender_match = re.search(
         r"\bSender\s*:\s*(.{1,150}?)"
         r"(?=\s+(?:UPI\s+)?Reference\b"

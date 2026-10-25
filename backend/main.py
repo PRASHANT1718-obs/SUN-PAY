@@ -13,6 +13,8 @@ from email_reader import (
     read_latest_new_hdfc_email,
     _save_checkpoint,
 )
+from fastapi import Depends, HTTPException
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 # --------------------------------------------------
 # CONFIGURATION
@@ -35,6 +37,46 @@ supabase = create_client(
     SUPABASE_URL,
     SUPABASE_SECRET_KEY,
 )
+
+OWNER_USER_ID = os.getenv("OWNER_USER_ID", "").strip()
+
+if not OWNER_USER_ID:
+    raise RuntimeError("OWNER_USER_ID is missing from backend/.env")
+
+bearer_scheme = HTTPBearer(auto_error=False)
+
+
+def require_owner(
+    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
+):
+    if credentials is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Authentication required",
+        )
+
+    try:
+        response = supabase.auth.get_user(credentials.credentials)
+        user = response.user
+    except Exception:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired access token",
+        )
+
+    if user is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid access token",
+        )
+
+    if str(user.id) != OWNER_USER_ID:
+        raise HTTPException(
+            status_code=403,
+            detail="Owner access only",
+        )
+
+    return user
 
 app = FastAPI(title="SUN PAY Backend")
 
@@ -98,7 +140,10 @@ def home():
 # --------------------------------------------------
 
 @app.post("/api/create-payment")
-def create_payment(request: PaymentRequest):
+def create_payment(
+    request: PaymentRequest,
+    owner=Depends(require_owner),
+):
     try:
         amount = request.amount.quantize(
             Decimal("0.01")
@@ -146,7 +191,10 @@ def create_payment(request: PaymentRequest):
 # --------------------------------------------------
 
 @app.post("/api/check-payment")
-def check_payment(request: CheckPaymentRequest):
+def check_payment(
+    request: CheckPaymentRequest,
+    owner=Depends(require_owner),
+):
     try:
         # Fetch payment record.
         result = (

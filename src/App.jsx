@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-const UPI_ID = "prashantdubey1718@okhdfcbank";
+const UPI_ID = "prashantdubey1718@okhdfbank";
 const PAYEE_NAME = "Prashant Dubey";
 const BACKEND_URL = "http://127.0.0.1:8000";
 
