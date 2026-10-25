@@ -87,6 +87,7 @@ app.add_middleware(
         "https://sun-rhv03nizc-pratuner.vercel.app",
 
     ],
+    allow_origin_regex=r"https://sun-[a-z0-9-]+-pratuner\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
