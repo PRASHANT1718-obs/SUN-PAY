@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "./lib/supabase";
 import "./App.css";
 
-const UPI_ID = "prashantdubey1718@okhdfbank";
+const UPI_ID = "prashantdubey1718@okhdfcbank";
 const PAYEE_NAME = "Prashant Dubey";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
