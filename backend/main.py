@@ -83,11 +83,9 @@ app = FastAPI(title="SUN PAY Backend")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://sun-pay-zeta.vercel.app",
-        "https://sun-rhv03nizc-pratuner.vercel.app",
+        "https://sunpay1.netlify.app",
 
     ],
-    allow_origin_regex=r"https://sun-[a-z0-9-]+-pratuner\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
